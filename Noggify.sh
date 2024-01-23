@@ -68,7 +68,7 @@ echo "        _
   \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
                             
  The input directory "$InputDirectory" does not exist. 
- Open Noggify_Texturemaps.sh with a text editor and set the variables.
+ Open Noggify.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
 exit 1
@@ -83,7 +83,7 @@ echo "        _
   \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
                             
  The output directory "$OutputDirectory" does not exist. 
- Open Noggify_Texturemaps.sh with a text editor and set the variables.
+ Open Noggify.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
 exit 1
