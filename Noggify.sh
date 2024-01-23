@@ -121,7 +121,8 @@ case $choice in
         echo " Heightmap complete
         "
     else 
-        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
+        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found.
+        "
     fi
     ;;
 2)
@@ -131,7 +132,8 @@ case $choice in
         echo " Layer1 complete
         "
     else 
-        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
+        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found.
+        "
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
         echo " Splitting layer2 alphamap..."
@@ -139,7 +141,8 @@ case $choice in
         echo " Layer2 complete
         "
     else 
-        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
+        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found.
+        "
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
         echo " Splitting layer3 alphamap..."
@@ -147,7 +150,8 @@ case $choice in
         echo " Layer3 complete
         "
     else 
-        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
+        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found.
+        "
     fi
     ;;
 3)
@@ -157,7 +161,8 @@ case $choice in
         echo " Vertexcolor complete
         "
     else 
-        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
+        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found.
+        "
     fi
     ;;
 4)
@@ -167,7 +172,8 @@ case $choice in
         echo " Heightmap complete
         "
     else 
-        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
+        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found.
+        "
     fi
     if [ -e ${Layer1Name}${FileType} ]; then
         echo " Splitting layer 1 alphamap..."
@@ -175,7 +181,8 @@ case $choice in
         echo " Layer1 complete
         "
     else 
-        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
+        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found.
+        "
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
         echo " Splitting layer 2 alphamap..."
@@ -183,7 +190,8 @@ case $choice in
         echo " Layer2 complete
         "
     else 
-        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
+        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found.
+        "
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
         echo " Splitting layer 3 alphamap..."
@@ -191,7 +199,8 @@ case $choice in
         echo " Layer3 complete
         "
     else 
-        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
+        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found.
+        "
     fi
     if [ -e ${VcolorName}${FileType} ]; then
         echo " Splitting vertexcolor map..."
@@ -199,7 +208,8 @@ case $choice in
         echo " Vertexcolor complete
         "
     else 
-        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
+        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found.
+        "
     fi
     ;;
 *)
