@@ -105,8 +105,7 @@ echo "
                                           #        #        #
                                           -##-##-##-##-##-##-"                            
 while true; do
-echo " 
- Split textures:"
+echo " Split textures:"
 echo " ----------------------"
 echo " 1. Height"
 echo " 2. Alpha"
@@ -116,7 +115,7 @@ read -p "> " choice
 case $choice in
 1)
     if [ -e ${HeightName}${FileType} ]; then
-        echo " Splitting heightmap..."
+        echo " Heightmap in progress..."
         magick convert  $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
         echo " Heightmap complete
         "
@@ -127,7 +126,7 @@ case $choice in
     ;;
 2)
     if [ -e ${Layer1Name}${FileType} ]; then
-        echo " Splitting layer1 alphamap..."
+        echo " Layer1 in progress..."
         magick convert  $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer1 complete
         "
@@ -136,7 +135,7 @@ case $choice in
         "
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
-        echo " Splitting layer2 alphamap..."
+        echo " Layer2 in progress..."
         magick convert  $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer2 complete
         "
@@ -145,7 +144,7 @@ case $choice in
         "
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
-        echo " Splitting layer3 alphamap..."
+        echo " Layer3 in progress..."
         magick convert  $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer3 complete
         "
@@ -156,7 +155,7 @@ case $choice in
     ;;
 3)
     if [ -e ${VcolorName}${FileType} ]; then
-        echo " Splitting vertexcolor map..."
+        echo " Vertexcolor in progress..."
         magick convert  $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Vertexcolor complete
         "
@@ -167,7 +166,7 @@ case $choice in
     ;;
 4)
     if [ -e ${HeightName}${FileType} ]; then
-        echo " Splitting heightmap..."
+        echo " Heightmap in progress..."
         magick convert  $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
         echo " Heightmap complete
         "
@@ -176,7 +175,7 @@ case $choice in
         "
     fi
     if [ -e ${Layer1Name}${FileType} ]; then
-        echo " Splitting layer 1 alphamap..."
+        echo " Layer1 in progress..."
         magick convert  $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer1 complete
         "
@@ -185,7 +184,7 @@ case $choice in
         "
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
-        echo " Splitting layer 2 alphamap..."
+        echo " Layer2 in progress..."
         magick convert  $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer2 complete
         "
@@ -194,7 +193,7 @@ case $choice in
         "
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
-        echo " Splitting layer 3 alphamap..."
+        echo " Layer3 in progress..."
         magick convert  $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Layer3 complete
         "
@@ -203,7 +202,7 @@ case $choice in
         "
     fi
     if [ -e ${VcolorName}${FileType} ]; then
-        echo " Splitting vertexcolor map..."
+        echo " Vertexcolor in progress..."
         magick convert  $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
         echo " Vertexcolor complete
         "
@@ -213,7 +212,8 @@ case $choice in
     fi
     ;;
 *)
-    echo " Error: Enter 1-4."
+    echo " Error: Enter 1-4.
+    "
     ;;
 esac
 done
