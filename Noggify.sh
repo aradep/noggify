@@ -59,7 +59,7 @@ OffsetY=1
 ###################################################################################################
 
 # Checks
-if [ ! -d "$InputDirectory" ] || [ ! -d "$OutputDirectory" ]; then
+if [ ! -d "$InputDirectory" ]; then
 echo "        _
        | |                  
    ___ | |__    _ __   ___  
@@ -68,7 +68,7 @@ echo "        _
   \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
                             
  The input directory "$InputDirectory" does not exist. 
- Please open Noggify_Texturemaps.sh with a text editor and set the variables.
+ Open Noggify_Texturemaps.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
 exit 1
@@ -83,7 +83,7 @@ echo "        _
   \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
                             
  The output directory "$OutputDirectory" does not exist. 
- Please open Noggify_Texturemaps.sh with a text editor and set the variables.
+ Open Noggify_Texturemaps.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
 exit 1
@@ -91,7 +91,6 @@ fi
 fi
 
 #You passed
-while true; do
 echo "           
                                                      -##-##-##-
                                           -##-##-##- #        #
@@ -104,86 +103,107 @@ echo "
                 __/ | __/ |       __/ |   #        #        #
                |___/ |___/       |___/    #        #        #
                                           #        #        #
-                                          -##-##-##-##-##-##-"
-echo "1. Height"
-echo "2. Alpha"
-echo "3. vColor"
-echo "4. All"
+                                          -##-##-##-##-##-##-"                            
+while true; do
+echo " 
+ Split textures:"
+echo " ----------------------"
+echo " 1. Height"
+echo " 2. Alpha"
+echo " 3. vColor"
+echo " 4. All"
 read -p "> " choice
-
 case $choice in
 1)
     if [ -e ${HeightName}${FileType} ]; then
-        echo "Splitting heightmap..."
-        magick convert -monitor $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
+        echo " Splitting heightmap..."
+        magick convert  $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
+        echo " Heightmap complete
+        "
     else 
-        echo "Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
+        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
     fi
     ;;
 2)
     if [ -e ${Layer1Name}${FileType} ]; then
-        echo "Splitting layer 1 alphamap..."
-        magick convert -monitor $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer1 alphamap..."
+        magick convert  $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer1 complete
+        "
     else 
-        echo "Error: Layer 1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
+        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
-        echo "Splitting layer 2 alphamap..."
-        magick convert -monitor $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer2 alphamap..."
+        magick convert  $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer2 complete
+        "
     else 
-        echo "Error: Layer 2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
+        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
-        echo "Splitting layer 3 alphamap..."
-        magick convert -monitor $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer3 alphamap..."
+        magick convert  $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer3 complete
+        "
     else 
-        echo "Error: Layer 3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
+        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
     fi
     ;;
 3)
     if [ -e ${VcolorName}${FileType} ]; then
-        echo "Splitting vertexcolor map..."
-        magick convert -monitor $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting vertexcolor map..."
+        magick convert  $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Vertexcolor complete
+        "
     else 
-        echo "Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
+        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
     fi
     ;;
 4)
     if [ -e ${HeightName}${FileType} ]; then
-        echo "Splitting heightmap..."
-        magick convert -monitor $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
+        echo " Splitting heightmap..."
+        magick convert  $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$HeightName$FileType)'/'$GridSize')*1)+'$OffsetY')]_height' -scale 257x257^ +repage +adjoin PNG64:%[filename:tile].png
+        echo " Heightmap complete
+        "
     else 
-        echo "Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
+        echo " Error: Heightmap "$InputDirectory$HeightName$FileType" not found."
     fi
     if [ -e ${Layer1Name}${FileType} ]; then
-        echo "Splitting layer 1 alphamap..."
-        magick convert -monitor $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer 1 alphamap..."
+        magick convert  $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer1Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_layer1' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer1 complete
+        "
     else 
-        echo "Error: Layer 1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
+        echo " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found."
     fi
     if [ -e ${Layer2Name}${FileType} ]; then
-        echo "Splitting layer 2 alphamap..."
-        magick convert -monitor $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer 2 alphamap..."
+        magick convert  $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer2Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer2' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer2 complete
+        "
     else 
-        echo "Error: Layer 2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
+        echo " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found."
     fi
     if [ -e ${Layer3Name}${FileType} ]; then
-        echo "Splitting layer 3 alphamap..."
-        magick convert -monitor $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting layer 3 alphamap..."
+        magick convert  $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$Layer3Name$FileType)'/'$GridSize')*1)+'$OffsetY')]_Layer3' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Layer3 complete
+        "
     else 
-        echo "Error: Layer 3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
+        echo " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found."
     fi
     if [ -e ${VcolorName}${FileType} ]; then
-        echo "Splitting vertexcolor map..."
-        magick convert -monitor $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Splitting vertexcolor map..."
+        magick convert  $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin PNG32:%[filename:tile].png
+        echo " Vertexcolor complete
+        "
     else 
-        echo "Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
+        echo " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found."
     fi
     ;;
 *)
-    echo "Enter 1-4."
-    read -p "> " choice
+    echo " Error: Enter 1-4."
     ;;
 esac
-read -p "> " choice
 done
