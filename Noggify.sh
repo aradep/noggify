@@ -60,14 +60,7 @@ OffsetY=1
 
 # Checks
 if [ ! -d "$InputDirectory" ]; then
-echo "        _
-       | |                  
-   ___ | |__    _ __   ___  
-  / _ \| '_ \  | '_ \ / _ \ 
- | (_) | | | | | | | | (_) |  _   _   _  
-  \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
-                            
- The input directory "$InputDirectory" does not exist. 
+echo " The input directory "$InputDirectory" does not exist. 
  Open Noggify.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
@@ -75,14 +68,7 @@ exit 1
 else 
 if
 [ ! -d $OutputDirectory ]; then
-echo "        _
-       | |                  
-   ___ | |__    _ __   ___  
-  / _ \| '_ \  | '_ \ / _ \ 
- | (_) | | | | | | | | (_) |  _   _   _  
-  \___/|_| |_| |_| |_|\___/  (_) (_) (_) 
-                            
- The output directory "$OutputDirectory" does not exist. 
+echo " The output directory "$OutputDirectory" does not exist. 
  Open Noggify.sh with a text editor and set the variables.
 "
 read -n 1 -s -r -p " Press any key to exit..."
