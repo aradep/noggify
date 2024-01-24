@@ -14,7 +14,7 @@ InputDirectory='./'
 
 #   Output Directory
 #       Description:    Folder where completed tiles are sent.
-#       Suggestion:     Set this to your Noggit project folder. 
+#       Suggestion:     Set this to the map directory of your Noggit project folder. 
 #                       ex. OutputDirectory="E:/WotLK/Data/patch-5.mpq/world/maps/desert/"
 
 OutputDirectory="./output/"
