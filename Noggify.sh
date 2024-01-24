@@ -42,7 +42,7 @@ FileType='.png'
 MapName='Desert'
 
 #   GridSize
-#       Description:    Map size in ADTs
+#       Description:    Map size in ADTs (x by x)
 #       Important:      Maximum heightmap resolution: 256x256 multiplied by GridSize. Maximum 
 #                       alphamap resolution: 1024x1024 multiplied by GridSize.
 
