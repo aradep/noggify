@@ -105,7 +105,7 @@ fi
 process_vcolor() {
 if [ -e ${VcolorName}${FileType} ]; then
 echo -e "\n Vertexcolor in progress..."
-magick convert  -depth 8 -type Grayscale $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin %[filename:tile].png
+magick convert  -depth 8 $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$(magick identify -format "%[fx:w]" $InputDirectory$VcolorName$FileType)'/'$GridSize')*1)+'$OffsetY')]_Vcolor' -scale 1024x1024^ +repage +adjoin %[filename:tile].png
 echo -e " Vertexcolor complete"
 else echo -e " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found.\n"
 fi
