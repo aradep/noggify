@@ -41,14 +41,14 @@ FileType='.png'
 #   MapName
 #       Description:    Map name used in Noggit/WoW
 
-MapName='Desert'
+MapName='Mountains'
 
 #   GridSize
 #       Description:    Map size in ADTs (x by x)
 #       Important:      Suggested heightmap resolution: 256x256 multiplied by GridSize. 
 #                       Suggested alphamap resolution: 1024x1024 multiplied by GridSize.
 
-GridSize=1
+GridSize=8
 
 #   Offset
 #       Description:    The top-left tile of the map will be at this coordinate on the ADT grid.
