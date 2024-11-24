@@ -5,6 +5,17 @@
 
 # CONFIG START
 ###################################################################################################
+# SCRIPT SETTINGS
+#
+#   Parallel processing
+#       Description:    Process all selected files at the same time. Increases CPU usage.
+
+parallel=true
+
+#
+###################################################################################################
+
+###################################################################################################
 # FILE SETTINGS
 #
 #   Input Directory
@@ -72,56 +83,58 @@ fi
 
 process_height() {
 if [ -e ${HeightName}${FileType} ]; then
-echo -e "\n Heightmap in progress..."
-Start=$(date +%s%3N)
-FileSize=$(magick identify -ping -format "%w" $InputDirectory$HeightName$FileType)
-magick convert -depth 16 -type Grayscale $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$FileSize'/'$GridSize')*1)+'$OffsetY')]_height' -resize 256x256! +repage +adjoin %[filename:tile].png
-End=$(($(date +%s%3N)-Start))
-echo -e " Heightmap completed in $End ms."
+echo -e " Height in progress..."
+HeightStart=$(date +%s%3N)
+HeightFileSize=$(magick identify -ping -format "%w" $InputDirectory$HeightName$FileType)
+magick convert -depth 16 -type Grayscale $InputDirectory$HeightName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$HeightFileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$HeightFileSize'/'$GridSize')*1)+'$OffsetY')]_height' -resize 256x256! +repage +adjoin %[filename:tile].png
+HeightEnd=$((($(date +%s%3N) - HeightStart) / 1000))
+echo -e " Height completed in - "$HeightEnd"s"
 else echo -e " Error: Heightmap "$InputDirectory$HeightName$FileType" not found.\n"
 fi
 }
+
 process_layer1() {
 if [ -e ${Layer1Name}${FileType} ]; then
-echo -e "\n Layer1 in progress..."
-Start=$(date +%s%3N)
-FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer1Name$FileType)
-magick convert -depth 8 -type Grayscale $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$FileSize'/'$GridSize')*1)+'$OffsetY')]_layer1' -resize 1024x1024! +repage +adjoin %[filename:tile].png
-End=$(($(date +%s%3N)-Start))
-echo -e " Layer1 completed in $End ms."
+echo -e " Layer1 in progress..."
+Layer1Start=$(date +%s%3N)
+Layer1FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer1Name$FileType)
+magick convert -depth 8 -type Grayscale $InputDirectory$Layer1Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$Layer1FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$Layer1FileSize'/'$GridSize')*1)+'$OffsetY')]_layer1' -resize 1024x1024! +repage +adjoin %[filename:tile].png
+Layer1End=$((($(date +%s%3N) - Layer1Start) / 1000))
+echo -e " Layer1 completed in - "$Layer1End"s"
 else echo -e " Error: Layer1 alphamap "$InputDirectory$Layer1Name$FileType" not found.\n"
 fi
 }
 process_layer2() {
 if [ -e ${Layer2Name}${FileType} ]; then
-echo -e "\n Layer2 in progress..."
-Start=$(date +%s%3N)
-FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer2Name$FileType)
-magick convert  -depth 8 -type Grayscale $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$FileSize'/'$GridSize')*1)+'$OffsetY')]_Layer2' -resize 1024x1024! +repage +adjoin %[filename:tile].png
-End=$(($(date +%s%3N)-Start))
-echo -e " Layer2 completed in $End ms."
+echo -e " Layer2 in progress..."
+Layer2Start=$(date +%s%3N)
+Layer2FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer2Name$FileType)
+magick convert  -depth 8 -type Grayscale $InputDirectory$Layer2Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$Layer2FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$Layer2FileSize'/'$GridSize')*1)+'$OffsetY')]_Layer2' -resize 1024x1024! +repage +adjoin %[filename:tile].png
+Layer2End=$((($(date +%s%3N) - Layer2Start) / 1000))
+echo -e " Layer2 completed in - "$Layer2End"s"
 else echo -e " Error: Layer2 alphamap "$InputDirectory$Layer2Name$FileType" not found.\n"
 fi
 }
 process_layer3() {
 if [ -e ${Layer3Name}${FileType} ]; then
-echo -e "\n Layer3 in progress..."
-Start=$(date +%s%3N)
-FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer3Name$FileType)
-magick convert  -depth 8 -type Grayscale $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$FileSize'/'$GridSize')*1)+'$OffsetY')]_Layer3' -resize 1024x1024! +repage +adjoin %[filename:tile].png
-End=$(($(date +%s%3N)-Start))
-echo -e " Layer3 completed in $End ms."
+echo -e " Layer3 in progress..."
+Layer3Start=$(date +%s%3N)
+Layer3FileSize=$(magick identify -ping -format "%w" $InputDirectory$Layer3Name$FileType)
+magick convert  -depth 8 -type Grayscale $InputDirectory$Layer3Name$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$Layer3FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$Layer3FileSize'/'$GridSize')*1)+'$OffsetY')]_Layer3' -resize 1024x1024! +repage +adjoin %[filename:tile].png
+Layer3End=$((($(date +%s%3N) - Layer3Start) / 1000))
+echo -e " Layer3 completed in - "$Layer3End"s"
 else echo -e " Error: Layer3 alphamap "$InputDirectory$Layer3Name$FileType" not found.\n"
 fi
 }
+
 process_vcolor() {
 if [ -e ${VcolorName}${FileType} ]; then
-echo -e "\n Vertexcolor in progress..."
-Start=$(date +%s%3N)
-FileSize=$(magick identify -ping -format "%w" $InputDirectory$VcolorName$FileType)
-magick convert  -depth 8 $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$FileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$FileSize'/'$GridSize')*1)+'$OffsetY')]_vcol' -resize 1024x1024! +repage +adjoin %[filename:tile].png
-End=$(($(date +%s%3N)-Start))
-echo -e " Vertexcolor completed in $End ms."
+echo -e " Vcolor in progress..."
+VcolorStart=$(date +%s%3N)
+VcolorFileSize=$(magick identify -ping -format "%w" $InputDirectory$VcolorName$FileType)
+magick convert  -depth 8 $InputDirectory$VcolorName$FileType -crop $GridSize'x'$GridSize@ -set filename:tile $OutputDirectory$MapName'_%[fx:round(page.x/(('$VcolorFileSize'/'$GridSize')*1)+'$OffsetX')]_%[fx:round(page.y/(('$VcolorFileSize'/'$GridSize')*1)+'$OffsetY')]_vcol' -resize 1024x1024! +repage +adjoin %[filename:tile].png
+VcolorEnd=$((($(date +%s%3N) - VcolorStart) / 1000))
+echo -e " Vcolor completed in - "$VcolorEnd"s"
 else echo -e " Error: Vertexcolor map "$InputDirectory$VcolorName$FileType" not found.\n"
 fi
 }
@@ -150,9 +163,9 @@ echo " 4. All"
 read -p "> " choice
 case $choice in
 1) process_height ;;
-2) process_layer1 && process_layer2 && process_layer3 ;;
+2) if $parallel; then process_layer1 & process_layer2 & process_layer3 & wait; else process_layer1 && process_layer2 && process_layer3; fi ;;
 3) process_vcolor ;;
-4) process_height && process_layer1 && process_layer2 && process_layer3 && process_vcolor ;;
+4) if $parallel; then process_height & process_layer1 & process_layer2 & process_layer3 & process_vcolor & wait; else process_height && process_layer1 && process_layer2 && process_layer3 && process_vcolor; fi ;;
 *) echo -e " Error: Enter 1-4.\n" ;;
 esac
 done
